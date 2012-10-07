@@ -1,0 +1,5 @@
+## Project Euler - Scripts
+
+Scripts used to solve the problem sets at [Project Euler](http://projecteuler.net/).
+
+My user name is "christoomey" if you want to see my progress.
