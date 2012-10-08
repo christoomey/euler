@@ -54,17 +54,12 @@ end
 
 def main
   matrix = Matrix.new File.open("support/011-adjacent_sum.txt", "r") {|f| JSON.parse f.read}
-  dimension = matrix.length
-  max = 0
+  dimension, max = matrix.length, 0
   (1..dimension).each do |row|
     (1..dimension).each do |column|
       cell = Cell.new row, column
-      adjacents = []
-      adjacents.push matrix.right cell
-      adjacents.push matrix.down cell
-      adjacents.push matrix.diagonal_down cell
-      adjacents.push matrix.diagonal_up cell
-      local_max = adjacents.compact.collect {|set| set.inject &:* }.max
+      adj = [:right, :down, :diagonal_down, :diagonal_up].collect {|d| matrix.send d, cell}
+      local_max = adj.compact.collect {|set| set.inject &:* }.max
       next unless local_max
       max = local_max if local_max > max
     end
